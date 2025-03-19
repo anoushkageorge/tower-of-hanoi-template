@@ -10,6 +10,7 @@ public class TowerSolver {
     public void solve(TowerModel model)
     {
         this.model = model;
+        solve(model.height(), 0, 2, 1); //3 rods
         // Call the missing solve method (not this one)
     }
 

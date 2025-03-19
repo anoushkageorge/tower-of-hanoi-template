@@ -19,5 +19,10 @@ public class TowerSolver {
     //
     // [ solve method here]
     //
+    private void solve (int n, int source, int destination, int auxillerary) {
+        if (n==1) {
+            move.move(source, destination); //base case
+        } else {}
+    }
 
 }

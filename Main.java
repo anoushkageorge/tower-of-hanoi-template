@@ -1,15 +1,10 @@
 public class Main {
-
     public static void main(String[] args) {
+        int height = 3; // Change this to test different heights
+        TowerModel model = new TowerModel(height);
+        TowerSolver solver = new TowerSolver();
 
-        // Example: Solve a tower
-        // TowerModel model = new TowerModel(3);
-        //TowerSolver solver = new TowerSolver();
-        //solver.solve(model);
-
-        // Run test suite
-        TestSuite test = new TestSuite();
-        test.run();
-
+        model.print(); // Print the initial state of the towers
+        solver.solve(model); // Solve the Tower of Hanoi problem
     }
 }

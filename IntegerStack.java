@@ -1,29 +1,47 @@
-import java.util.Stack;
-
 public class IntegerStack {
-    private Stack<Integer> stack;
+    private int[] stack;
+    private int top;
 
-    public IntegerStack() {
-        stack = new Stack<>();
+    public IntegerStack(int capacity) {
+        stack = new int[capacity];
+        top = -1;
     }
 
     public void push(int value) {
-        stack.push(value);
+        if (top < stack.length - 1) {
+            stack[++top] = value;
+        }
     }
 
     public int pop() {
-        return stack.isEmpty() ? 0 : stack.pop();
-    }
-
-    public int get(int index) {
-        return index < stack.size() ? stack.get(index) : 0;
+        if (top >= 0) {
+            return stack[top--];
+        }
+        return 0; // Empty stack case
     }
 
     public int peek() {
-        return stack.isEmpty() ? 0 : stack.peek();
+        if (top >= 0) {
+            return stack[top];
+        }
+        return 0; // Empty stack case
     }
 
     public boolean isEmpty() {
-        return stack.isEmpty();
+        return top == -1;
+    }
+
+    public int get(int index) {
+        if (index >= 0 && index <= top) {
+            return stack[index];
+        }
+        return 0;
+    }
+
+    public void print() {
+        for (int i = 0; i <= top; i++) {
+            System.out.print(stack[i] + " ");
+        }
+        System.out.println();
     }
 }

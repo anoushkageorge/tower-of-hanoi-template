@@ -1,17 +1,17 @@
 public class TowerModel {
-    private int height;
     private IntegerStack[] towers;
+    private int height;
 
     public TowerModel(int height) {
         this.height = height;
         towers = new IntegerStack[3];
-
+        
         // Initialize towers
         for (int i = 0; i < 3; i++) {
-            towers[i] = new IntegerStack();
+            towers[i] = new IntegerStack(height);
         }
 
-        // Fill the first tower with disks (largest at bottom)
+        // Fill the first tower with disks in decreasing size
         for (int i = height; i > 0; i--) {
             towers[0].push(i);
         }
@@ -25,20 +25,31 @@ public class TowerModel {
         return towers;
     }
 
-    public void move(int from, int to) {
+    public boolean move(int from, int to) {
         if (from < 0 || from >= 3 || to < 0 || to >= 3) {
-            return; // Invalid tower index
+            return false; // Invalid tower index
         }
+        
         if (towers[from].isEmpty()) {
-            return; // No disk to move
+            return false; // No disk to move
         }
-
+        
         int disk = towers[from].peek();
+        
         if (!towers[to].isEmpty() && towers[to].peek() < disk) {
-            return; // Illegal move (can't place a larger disk on a smaller one)
+            return false; // Cannot place a larger disk on a smaller one
         }
-
+        
         towers[from].pop();
         towers[to].push(disk);
+        return true;
+    }
+
+    public void print() {
+        System.out.println("Current state of towers:");
+        for (int i = 0; i < 3; i++) {
+            System.out.print("Tower " + i + ": ");
+            towers[i].print();
+        }
     }
 }

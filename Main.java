@@ -1,10 +1,14 @@
 public class Main {
     public static void main(String[] args) {
-        int height = 3; // Change this to test different heights
-        TowerModel model = new TowerModel(height);
-        TowerSolver solver = new TowerSolver();
+        TowerModel model = new TowerModel(3);
+        model.print(); // Print initial state
 
-        model.print(); // Print the initial state of the towers
-        solver.solve(model); // Solve the Tower of Hanoi problem
+        System.out.println("Moving disk from Tower 0 to Tower 2...");
+        model.move(0, 2);
+        model.print(); // Print state after move
+
+        System.out.println("Moving disk from Tower 0 to Tower 1...");
+        model.move(0, 1);
+        model.print(); // Print state after move
     }
 }

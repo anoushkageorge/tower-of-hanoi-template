@@ -1,24 +1,18 @@
 public class TowerSolver {
-    private TowerModel model;
-
-    public TowerSolver()
-    {
-        // Nothing to do here
+    public void solve(TowerModel model) {
+        moveDisks(model.getHeight(), model.getTowers(), 0, 2, 1);
     }
 
-    public void solve(TowerModel model)
-    {
-        this.model = model;
-        solve(model.height(), 0, 2, 1); // Solve for all disks
-    }
+    private void moveDisks(int n, IntegerStack[] towers, int from, int to, int aux) {
+        if (n <= 0) return;
 
-    private void solve(int n, int source, int destination, int auxiliary) {
-        if (n == 1) {
-            model.move(source, destination); // Base case
-        } else {
-            solve(n - 1, source, auxiliary, destination); // Move n-1 disks from source to auxiliary
-            model.move(source, destination); // Move nth disk from source to destination
-            solve(n - 1, auxiliary, destination, source); // Move disks from auxiliary to destination
-        }
+        // Move n-1 disks from 'from' to 'aux' using 'to' as auxiliary
+        moveDisks(n - 1, towers, from, aux, to);
+
+        // Move the nth disk from 'from' to 'to'
+        towers[to].push(towers[from].pop());
+
+        // Move the n-1 disks from 'aux' to 'to' using 'from' as auxiliary
+        moveDisks(n - 1, towers, aux, to, from);
     }
 }
